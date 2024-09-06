@@ -80,7 +80,7 @@ jobs:
         if: github.event_name == 'release'
         run: |
           echo "${{ secrets.GPG_KEY_83F9945BC33EC39E9710206C8B4927076BA50A83_PASSPHRASE }}" > passphrase.txt
-          gpg --local-user 83F9945BC33EC39E9710206C8B4927076BA50A83 \
+          gpg --local-user C6FA12FB4875E9B946B78C782539F55B96B7EAED \
               --batch \
               --yes \
               --passphrase-file passphrase.txt \
