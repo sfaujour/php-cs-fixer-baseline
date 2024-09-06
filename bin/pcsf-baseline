@@ -17,8 +17,13 @@ use Aeliot\PhpCsFixerBaseline\Service\Builder;
 use Aeliot\PhpCsFixerBaseline\Service\Saver;
 
 $autoloaderPath = (static function (): string {
-    if (Phar::running()) {
-        return __DIR__ . '/../vendor/autoload.php';
+    if (class_exists('Phar')) {
+        try {
+            Phar::mapPhar('pcsf-baseline.phar');
+
+            return 'phar://pcsf-baseline.phar/vendor/autoload.php';
+        } catch (PharException $e) {
+        }
     }
 
     if (isset($GLOBALS['_composer_autoload_path'])) {

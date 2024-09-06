@@ -79,10 +79,11 @@ jobs:
       - name: Sign the PHAR
         if: github.event_name == 'release'
         run: |
-          gpg --local-user 83F9945BC33EC39E9710206C8B4927076BA50A83 \
+          echo "${{ secrets.GPG_KEY_83F9945BC33EC39E9710206C8B4927076BA50A83_PASSPHRASE }}" > passphrase.txt
+          gpg --local-user F8CD5A42EBF82D5EF077007DE8D46AA15B324CBD \
               --batch \
               --yes \
-              --passphrase="${{ secrets.GPG_KEY_83F9945BC33EC39E9710206C8B4927076BA50A83_PASSPHRASE }}" \
+              --passphrase-file passphrase.txt \
               --detach-sign \
               --output pcsf-baseline.phar.asc \
               pcsf-baseline.phar
